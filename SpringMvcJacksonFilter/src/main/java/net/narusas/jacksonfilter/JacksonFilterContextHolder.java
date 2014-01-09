@@ -1,5 +1,6 @@
 package net.narusas.jacksonfilter;
 
+import net.narusas.jacksonfilter.annotations.JsonFilter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j

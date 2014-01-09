@@ -3,6 +3,8 @@ package net.narusas.jacksonfilter;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.narusas.jacksonfilter.annotations.PredefinedSet;
+
 public class PredefinedSets {
 //	public static class AUDITABLE extends PredefinedSet {
 //		public AUDITABLE() {

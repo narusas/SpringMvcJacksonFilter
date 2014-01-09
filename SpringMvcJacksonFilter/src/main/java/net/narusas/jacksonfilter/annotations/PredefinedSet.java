@@ -1,4 +1,4 @@
-package net.narusas.jacksonfilter;
+package net.narusas.jacksonfilter.annotations;
 
 import lombok.Getter;
 

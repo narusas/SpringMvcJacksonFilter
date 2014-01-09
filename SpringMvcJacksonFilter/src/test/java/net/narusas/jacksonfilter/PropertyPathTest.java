@@ -2,6 +2,7 @@ package net.narusas.jacksonfilter;
 
 import static org.junit.Assert.*;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class PropertyPathTest {
@@ -36,6 +37,7 @@ public class PropertyPathTest {
 	}
 
 	// 늘어나는 뎁스 점프는 중간에 사용될 프로퍼티명을 알수 없으므로 에러
+	@Ignore //  중간에  Collection 등이 포함되면 늘어나는 점프가 될수 있다. 
 	@Test(expected = IllegalArgumentException.class)
 	public void testIllegalDepth() {
 		PropertyPath path = new PropertyPath(0);

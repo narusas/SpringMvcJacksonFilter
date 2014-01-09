@@ -1,10 +1,12 @@
-package net.narusas.jacksonfilter;
+package net.narusas.jacksonfilter.interceptor;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.narusas.jacksonfilter.JacksonFilterContextHolder;
+import net.narusas.jacksonfilter.annotations.JsonFilter;
 
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;

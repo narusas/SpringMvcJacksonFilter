@@ -1,5 +1,7 @@
 package net.narusas.jacksonfilter;
 
+import net.narusas.jacksonfilter.annotations.JsonFilter;
+
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;

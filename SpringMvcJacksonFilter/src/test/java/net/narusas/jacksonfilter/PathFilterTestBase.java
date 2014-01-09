@@ -8,6 +8,7 @@ import java.util.Collection;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
+import net.narusas.jacksonfilter.annotations.JsonFilter;
 
 import org.junit.Before;
 import org.springframework.context.annotation.Bean;
@@ -45,12 +46,12 @@ public class PathFilterTestBase {
 		return jsonString;
 	}
 
-	public JsonFilter fixture(String name) {
+	public JacksonFilterContext fixture(String name) {
 		try {
 			Method m = getClass().getMethod(name, new Class[] {});
 			JsonFilter filter = m.getAnnotation(JsonFilter.class);
 			assertNotNull(filter);
-			return filter;
+			return new JacksonFilterContext(filter);
 		} catch (Exception e) {
 			throw new IllegalArgumentException(e);
 		}
@@ -148,10 +149,17 @@ public class PathFilterTestBase {
 	@Data
 	public static class JSendResponse {
 		private Object content;
+		String status = "success";
 
 		public JSendResponse(Object content) {
 			this.content = content;
 		}
 
+	}
+
+	@Data
+	public static class Employee {
+		String name;
+		int age;
 	}
 }

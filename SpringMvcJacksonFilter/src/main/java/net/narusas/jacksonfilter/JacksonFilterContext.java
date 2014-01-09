@@ -1,5 +1,7 @@
 package net.narusas.jacksonfilter;
 
+import net.narusas.jacksonfilter.annotations.JsonFilter;
+import net.narusas.jacksonfilter.annotations.PredefinedSet;
 import lombok.Data;
 import lombok.Getter;
 

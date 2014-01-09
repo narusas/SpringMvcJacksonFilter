@@ -2,6 +2,8 @@ package net.narusas.jacksonfilter;
 
 import java.util.Arrays;
 
+import net.narusas.jacksonfilter.annotations.JsonFilter;
+
 import org.junit.Test;
 
 import com.fasterxml.jackson.core.JsonProcessingException;

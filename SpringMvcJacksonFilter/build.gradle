@@ -1,0 +1,73 @@
+repositories { mavenCentral() }
+
+apply plugin: 'java'
+apply plugin: 	'groovy'
+apply plugin: 	'eclipse'
+
+//  gradle eclipse 만 해도  cleanEclipse  까지 실행 되게 함
+tasks.eclipse.dependsOn(cleanEclipse)
+
+
+// 의존성 지정시 일괄적으로 반영할 버전들 명시
+def SPRING_RELEASE_VERSION			='3.2.6.RELEASE'
+def SLF4J_VERSION					='1.7.5' // SLF4J는 1.7이상 부터 JDK1.5+ varargs를 사용하게 변경됨
+
+
+dependencies { 
+	compile ( 
+		//  로깅 관련 라이브러리들
+		[group: 'org.slf4j', name: 'slf4j-api', version:SLF4J_VERSION],
+		[group: 'org.slf4j', name: 'jcl-over-slf4j', version:SLF4J_VERSION],
+		[group: 'org.slf4j', name: 'jul-to-slf4j', version:SLF4J_VERSION],
+		[group: 'org.slf4j', name: 'log4j-over-slf4j', version:SLF4J_VERSION],
+		[group: 'ch.qos.logback', name: 'logback-core', version:'1.0.13+'],
+		[group: 'ch.qos.logback', name: 'logback-classic', version:'1.0.13+'],
+		[group: 'org.logback-extensions', name: 'logback-ext-spring', version:'0.1.1'],
+		
+		//  Lombok  언어 확장 라이브러리
+		[group: 'org.projectlombok', name: 'lombok', version:'0.11.8'],
+		
+		
+		// 스프링 프레임워크
+		[group: 'org.springframework', name: 'spring-context', 				version: SPRING_RELEASE_VERSION],
+		[group: 'org.springframework', name: 'spring-context-support', 		version: SPRING_RELEASE_VERSION],
+		[group: 'org.springframework', name: 'spring-core', 				version: SPRING_RELEASE_VERSION],
+		[group: 'org.springframework', name: 'spring-expression', 			version: SPRING_RELEASE_VERSION],
+		[group: 'org.springframework', name: 'spring-jdbc', 				version: SPRING_RELEASE_VERSION],
+		[group: 'org.springframework', name: 'spring-orm', 					version: SPRING_RELEASE_VERSION],
+		[group: 'org.springframework', name: 'spring-web', 					version: SPRING_RELEASE_VERSION],
+		[group: 'org.springframework', name: 'spring-webmvc', 				version: SPRING_RELEASE_VERSION],
+		[group: 'org.springframework', name: 'spring-tx', 					version: SPRING_RELEASE_VERSION],
+		[group: 'org.springframework', name: 'spring-aspects', 				version: SPRING_RELEASE_VERSION],
+		[group: 'org.springframework', name: 'spring-instrument', 				version: SPRING_RELEASE_VERSION],
+		
+		
+		//   java  언어 지원 라이브러리
+		[group: 'javax.inject', name: 'javax.inject', version:'1'],
+		[group: 'org.apache.commons', name: 'commons-lang3', version:'3.1+'],
+		[group: 'org.apache.commons', name: 'commons-compress', version:'1.5+'],
+		[group: 'commons-configuration', name: 'commons-configuration', version:'1.9+'],
+		[group: 'commons-codec', name: 'commons-codec', version:'1.7+'],
+		[group: 'joda-time', name: 'joda-time', version:'2.1+'],
+		
+		// JSON  변환 관련 라이브러리
+		[group: 'com.fasterxml.jackson.core', name: 'jackson-core', version:'2.2.2+'],
+		[group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version:'2.2.2+'],
+		[group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version:'2.2.2+'],
+		
+		
+		[group: 'javax.servlet', name: 'servlet-api', version:'2.5'],
+		[group: 'javax.servlet', name: 'jsp-api', version:'2.0'],
+		[group: 'javax.servlet', name: 'jstl', version:'1.2'],
+	) 
+	
+	// 테스트 코드 지원 라이브러리
+	testCompile (
+		[group: 'junit', name: 'junit-dep', version: '4.10+'],
+		[group: 'org.mockito', name: 'mockito-core', version:'1.9.5+'],
+		[group: 'org.springframework', name: 'spring-test', version: SPRING_RELEASE_VERSION],
+		[group: 'org.dbunit', name: 'dbunit', version:'2.4.9', transitive:false],
+		[group: 'com.github.springtestdbunit', name: 'spring-test-dbunit', version:'1.0.1'],
+		[group: 'org.hamcrest', name: 'hamcrest-all', version:'1.3'],
+	)
+}

@@ -107,65 +107,65 @@ PredefinedSet has 3 methods(excludeProperties, excludePath, includeProperty).  T
 
 ## Config
 <code>
-@Configuration
+	@Configuration
 
-@EnableWebMvc
+	@EnableWebMvc
 
-public class SpringMvcConfig extends WebMvcConfigurerAdapter {
+	public class SpringMvcConfig extends WebMvcConfigurerAdapter {
 
 
-	@Override
-	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-		converters.add(mappingJacksonHttpMessageConverter());
+		@Override
+		public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+			converters.add(mappingJacksonHttpMessageConverter());
+		}
+	
+		/**
+		 * Ajax 지원을 위한 Jackson 컨버터를 등록한다
+		 * 
+		 * @return
+		 */
+		@Bean
+		public MappingJackson2HttpMessageConverter mappingJacksonHttpMessageConverter() {
+			MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
+			converter.setObjectMapper(objectMapper());
+			return converter;
+		}
+	
+		@Bean
+		public ObjectMapper objectMapper() {
+			ObjectMapper om = new ObjectMapper();
+			om.setFilters(new SimpleFilterProvider().addFilter("pathFilter", jacksonFilter()));
+			om.setAnnotationIntrospector(new JacksonFilterIntrospector("pathFilter", filterContext()));
+	
+			return om;
+		}
+	
+		@Bean
+		public JacksonFilter jacksonFilter() {
+			return new JacksonFilter("pathFilter", filterContext());
+		}
+	
+		@Bean
+		public FilterContext filterContext() {
+			return new ThreadLocalFilterContext();
+		}
+	
+		@Override
+		public void addInterceptors(InterceptorRegistry registry) {
+			registry.addInterceptor(jacksonFilterContextInterceptor());
+		}
+	
+		@Bean
+		public JacksonFilterContextInterceptor jacksonFilterContextInterceptor() {
+			return new JacksonFilterContextInterceptor();
+		}
+	
+		@Bean
+		public FixtureController testController() {
+			return new FixtureController();
+		}
+	
 	}
-
-	/**
-	 * Ajax 지원을 위한 Jackson 컨버터를 등록한다
-	 * 
-	 * @return
-	 */
-	@Bean
-	public MappingJackson2HttpMessageConverter mappingJacksonHttpMessageConverter() {
-		MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
-		converter.setObjectMapper(objectMapper());
-		return converter;
-	}
-
-	@Bean
-	public ObjectMapper objectMapper() {
-		ObjectMapper om = new ObjectMapper();
-		om.setFilters(new SimpleFilterProvider().addFilter("pathFilter", jacksonFilter()));
-		om.setAnnotationIntrospector(new JacksonFilterIntrospector("pathFilter", filterContext()));
-
-		return om;
-	}
-
-	@Bean
-	public JacksonFilter jacksonFilter() {
-		return new JacksonFilter("pathFilter", filterContext());
-	}
-
-	@Bean
-	public FilterContext filterContext() {
-		return new ThreadLocalFilterContext();
-	}
-
-	@Override
-	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(jacksonFilterContextInterceptor());
-	}
-
-	@Bean
-	public JacksonFilterContextInterceptor jacksonFilterContextInterceptor() {
-		return new JacksonFilterContextInterceptor();
-	}
-
-	@Bean
-	public FixtureController testController() {
-		return new FixtureController();
-	}
-
-}
 
 
 </code>

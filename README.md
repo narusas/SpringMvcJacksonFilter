@@ -182,3 +182,35 @@ Use  CurrentRequestFilterContext. It is handle current request based on ThreadLo
 		return e;
 	}
 	
+### Apply predefined sets
+
+If you reusable predeinfed set. 
+
+First, Define Set:
+
+	class SamplePropertySet1 extends PredefinedSet {
+		@Override
+		public String[] excludeProperties() {
+			return new String[] { "age", "address" };
+		}
+	}
+
+
+Second, apply that set:
+
+	@RequestMapping("/do5")
+	@JsonFilter(predefinedSet = { SamplePropertySet1.class })
+	public @ResponseBody
+	Employee do5() {
+		return e;
+	}
+	
+You can mix:
+
+	@RequestMapping("/do5")
+	@JsonFilter(predefinedSet = { SamplePropertySet1.class }, includeProperty={"address})
+	public @ResponseBody
+	Employee do5() {
+		return e;
+	}
+

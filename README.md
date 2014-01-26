@@ -107,6 +107,7 @@ PredefinedSet has 3 methods(excludeProperties, excludePath, includeProperty).  T
 
 ## Config
 <code>
+	
 	@Configuration
 	@EnableWebMvc
 
@@ -158,15 +159,7 @@ PredefinedSet has 3 methods(excludeProperties, excludePath, includeProperty).  T
 		public JacksonFilterContextInterceptor jacksonFilterContextInterceptor() {
 			return new JacksonFilterContextInterceptor();
 		}
-	
-		@Bean
-		public FixtureController testController() {
-			return new FixtureController();
-		}
-	
 	}
-
-
 </code>
 
 

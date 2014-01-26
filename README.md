@@ -16,29 +16,24 @@ So I make a jackson filter plugin to dynamic filter, and integration with spring
 
 # Simple Usage
 
-<code>
-import net.narusas.jacksonfilter.*;
 
-
-FilterContext context = new SimpleFilterContext();
-
-JacksonFilter filter = new JacksonFilter("pathFilter", context);
-
-ObjectMapper om = new ObjectMapper();
-
-filter.initObjectMapper(om);
-
-Employee employee = new Employee();
-
-employee.setAge(15);
-
-employee.setName("john");
-
-context.excludeProperty("name");
-
-String jsonString = om.writeValueAsString(obj);
-
-</code>
+	import net.narusas.jacksonfilter.*;
+	FilterContext context = new SimpleFilterContext();
+	JacksonFilter filter = new JacksonFilter("pathFilter", context);
+	
+	ObjectMapper om = new ObjectMapper();
+	
+	filter.initObjectMapper(om);
+	
+	Employee employee = new Employee();
+	
+	employee.setAge(15);
+	
+	employee.setName("john");
+	
+	context.excludeProperty("name");
+	
+	String jsonString = om.writeValueAsString(obj);
 
 
 

@@ -151,6 +151,7 @@ PredefinedSet has 3 methods(excludeProperties, excludePath, includeProperty).  T
 Add @JsonFilter annotation on controller method. 
 
 Ex)
+
 	@RequestMapping("/do3")
 	@JsonFilter(excludePath = { "employees.age" })
 	public @ResponseBody

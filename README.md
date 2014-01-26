@@ -108,7 +108,6 @@ PredefinedSet has 3 methods(excludeProperties, excludePath, includeProperty).  T
 ## Config
 <code>
 	@Configuration
-
 	@EnableWebMvc
 
 	public class SpringMvcConfig extends WebMvcConfigurerAdapter {

@@ -40,41 +40,39 @@ So I make a jackson filter plugin to dynamic filter, and integration with spring
 ## Support filter context methods
 ### Exclude property
 
-<code> 
-excludeProperty(String... propertyNames)
-</code>
+
+	excludeProperty(String... propertyNames)
+
 
 Exclude target property from _ALL_ bean that is filtered by jackson.
 
 
 ### Exclude path
-<code>
-excludePath(String... paths)
-</code>
+
+	excludePath(String... paths)
+
 
 Exclude target property path from _ROOT_ bean. 
 
 Ex)
 
-<code>
-Employee e =..;<br/>
-Department d = ..;<br/>
-d.addEmployee(e);<br/>
-...<br/>
-context.excludePath("employee.age");<br/>
-</code>
+	Employee e =..;
+	Department d = ..;
+	d.addEmployee(e);
+	...
+	context.excludePath("employee.age");
 
 Rendered Json)
 
-<code>
-{"name":"depart1",employees:[{"name":"John"}]} // age is excluded
-</code>
+
+	{"name":"depart1",employees:[{"name":"John"}]} // age is excluded
+
 
 
 ### Include property
-<code>
-includeProperty(String... propertyNames)
-</code>
+
+	includeProperty(String... propertyNames)
+
 
 Include target property from _ALL_ bean even that property is annonated by @JsonIgnore .
 
@@ -82,17 +80,15 @@ And include target property from _ALL_ bean even that property is contained in e
 
 
 ### Include path
-<code>
-includePath(String... path)
-</code>
+	includePath(String... path)
+
 
 Include target property path from _ROOT_ bean even that path is contained in exclude path(by excludePath or predefinedSet method). In other words, include has higer priority than exclude. 
 
 
 ### Apply predefined sets 
-<code>
-predefinedSet(Class<? extends PredefinedSet>... sets)
-</code>
+	predefinedSet(Class<? extends PredefinedSet>... sets)
+
 
 PredefinedSet has 3 methods(excludeProperties, excludePath, includeProperty).  This is use for defining reusable sets. 
 
@@ -101,8 +97,6 @@ PredefinedSet has 3 methods(excludeProperties, excludePath, includeProperty).  T
 # Integrate with Spring mvc
 
 ## Config
-<code>
-	
 	@Configuration
 	@EnableWebMvc
 
@@ -155,7 +149,6 @@ PredefinedSet has 3 methods(excludeProperties, excludePath, includeProperty).  T
 			return new JacksonFilterContextInterceptor();
 		}
 	}
-</code>
 
 
 ## Usage
@@ -163,8 +156,6 @@ PredefinedSet has 3 methods(excludeProperties, excludePath, includeProperty).  T
 Add @JsonFilter annotation on controller method. 
 
 Ex)
-
-<code>
 	@RequestMapping("/do3")
 	@JsonFilter(excludePath = { "employees.age" })
 	public @ResponseBody
@@ -180,12 +171,9 @@ Ex)
 		dept.setName("dept1");
 		return dept;
 	}
-</code>
 
 ### Filter by dynamic
 Use  CurrentRequestFilterContext. It is handle current request based on ThreadLocal. 
-
-<code>
 
 	@RequestMapping("/do6")
 	@JsonFilter(excludeProperty = { "age" })
@@ -198,4 +186,3 @@ Use  CurrentRequestFilterContext. It is handle current request based on ThreadLo
 		return e;
 	}
 	
-</code>

@@ -100,7 +100,7 @@ PredefinedSet has 3 methods(excludeProperties, excludePath, includeProperty).  T
 	@Configuration
 	@EnableWebMvc
 
-	public class SpringMvcConfig extends WebMvcConfigurerAdapter {
+	public class SpringJsonConfig extends WebMvcConfigurerAdapter {
 
 
 		@Override
@@ -108,11 +108,6 @@ PredefinedSet has 3 methods(excludeProperties, excludePath, includeProperty).  T
 			converters.add(mappingJacksonHttpMessageConverter());
 		}
 	
-		/**
-		 * Ajax 지원을 위한 Jackson 컨버터를 등록한다
-		 * 
-		 * @return
-		 */
 		@Bean
 		public MappingJackson2HttpMessageConverter mappingJacksonHttpMessageConverter() {
 			MappingJackson2HttpMessageConverter converter = new MappingJackson2HttpMessageConverter();
@@ -136,7 +131,7 @@ PredefinedSet has 3 methods(excludeProperties, excludePath, includeProperty).  T
 	
 		@Bean
 		public FilterContext filterContext() {
-			return new ThreadLocalFilterContext();
+			return new CurrentRequestFilterContext();
 		}
 	
 		@Override
